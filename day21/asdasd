@@ -1,0 +1,73 @@
+# I added a feature that asks if you want to play again after the game over screen. It was a bit tricky, since you can't actually delete a turtle object once the screen is initialized. I ended up moving the current pieces off screen and reinitializing the snake again.
+
+# main.py
+def play_again():
+    play_again = screen.textinput(title='Play Again?', prompt='Would you like to play again? (yes/no)')
+    if play_again.lower() == 'yes':
+        snake.reset_snake()
+        screen.listen()
+        return True
+    elif play_again.lower() == 'no':
+        screen.bye()
+
+# Detect collision with wall
+    if snake.head.xcor() > 297 or snake.head.xcor() < -297 or snake.head.ycor() > 297 or snake.head.ycor() < -297:
+        score.game_over()
+        if play_again():
+            score.reset()
+            score = ScoreBoard()
+
+# in snake.py
+    def reset_snake(self):
+        for seg in self.segments:
+            seg.hideturtle()
+            seg.setpos(500,500)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+
+
+# --------------------------------------------------------------
+
+# I tried a different method that just restarts the entire code:
+# make sure to import these in main.py:
+import os
+import sys
+
+def again():
+    os.execl(sys.executable, sys.executable, *sys.argv)
+
+def ask_play_again():
+    value = screen.textinput(title="Play again?", prompt="Type Y of N").lower()
+    if value == "y" or value == "ok":
+        return True
+
+if abs(snake.snake_segments[0].xcor()) > screen.window_width() // 2 or abs(
+        snake.snake_segments[0].ycor()) > screen.window_height() // 2:
+    scoreboard.game_over()
+    if ask_play_again():
+        again()
+    break
+
+for bodypart in snake.snake_segments[1:]:
+    if snake.snake_segments[0].distance(bodypart) < 10:
+        scoreboard.game_over()
+        game_on = False
+        if ask_play_again():
+            again()
+
+
+# --------------------------------------------------------------
+
+# Within my function that checks if food has been eaten, I added this code and it works.
+
+# add current food position
+invalid_food_positions = [food.position()]
+
+while food.position() in invalid_food_positions:
+    food.move()
+    for segment in snake.body_segments:
+        if food.distance(segment) < FOOD_SIZE:
+            invalid_food_positions.append(food.position())
+
+#With this solution it moves the food and then checks to see if it's inside a segment. If it is, it adds that to the list of invalid positions and tries again. I tested with a snake of about 400 segments and it worked perfectly for me.

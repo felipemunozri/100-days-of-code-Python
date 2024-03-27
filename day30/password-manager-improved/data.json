@@ -1,0 +1,18 @@
+{
+    "Amazon": {
+        "username": "example@mail.com",
+        "password": "gAAAAABk5R9SQi5epN12tglxxDCthm1swfS8PnoggLEOFTS7lqfq5LknATvM-xuuUVBGg-riIzBLHR5A38OLcdamdNmep1nxGA=="
+    },
+    "Google": {
+        "username": "example@mail.com",
+        "password": "gAAAAABk5R9Xm2h-wCyAnNmtqc5DH8DWDZdFFNZj1cJFeEVoancVQD80I7KkSOGcnGrAjGdLY58W6U_GxtAGjIedS6Hm2MUvYA=="
+    },
+    "Ebay": {
+        "username": "example@mail.com",
+        "password": "gAAAAABk5R9hJEusU05Mb2xL3qqFOZGVlfl8Hw4HLnuD6Vz09hUAwcvu5r9SU9pvvVoL82fEnrQq_QrxbzFIE-d87s-lJZO_wg=="
+    },
+    "Netflix": {
+        "username": "example@mail.com",
+        "password": "gAAAAABk5R9oYTwxH4e5F6y0HxZVkBPovfJiciYTnugdh-3pxLaa-Y2SSSpinkaVAddiotSyz8cWXq_gwsBpX-eFmwbyDHS83Q=="
+    }
+}

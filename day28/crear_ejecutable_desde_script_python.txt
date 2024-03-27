@@ -1,0 +1,12 @@
+# 1. Comando para generar archivo ejecutable usando pyinstaller. Ejecutar en raiz del proyecto
+
+pyinstaller --onefile -w -i tomato.ico main.py
+
+# --onefile especifica un solo archivo ejecutale
+# -w especifica que es una aplicacion GUI que no usa la consola
+# -i especifica un icono a usar, debe ser un archivo .ico
+# main.py es el archivo python principal a convertir en ejecutable
+
+# 2. Una vez generado el archivo moverlo desde la carpeta dist a la raiz del proyecto donde estan los demas archivos. Se pueden borrar las carpetas build y el archivo xxxx.spec
+
+# 3. Comprimir la carpeta completa como .ZIP y seleccionar la opción "Installer based on .ZIP file" en el programa NSIS. Se puede seleccionar la ruta de instalación por defecto. Dar a Generate y esto creará el archivo instalable .exe
