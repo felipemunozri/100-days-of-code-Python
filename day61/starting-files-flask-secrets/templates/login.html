@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+<!-- we import the render_form() function from Bootstrap-Flask -->
+{% from "bootstrap5/form.html" import render_form %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Login</h1>
+    <!-- now we can render the whole form by simply calling the render_form() function and passing to it the form
+    (login_form) we created in main.py -->
+    {{ render_form(form) }}
+{% endblock %}

@@ -1,0 +1,73 @@
+# PRE-DEPLOYMENT STEPS
+
+- Install gunicorn and add to requirements
+- Create a Procfile file
+- Add this content to Procfile:
+web: gunicorn main:app
+
+
+# WHERE WAS THE APP DEPLOYED?
+
+The app was deployed on Render (https://render.com/).
+
+# WHAT IS RENDER?
+
+Render is a cloud hosting platform which allows to deploy apps for free in its most basic plan, the "individual" plan, but this comes with some limitations, being the most important the database deletion 90 days after its creation if the database instance is not upgraded to a paid type instance (which starts at $7 USD/month, so it's not an option).
+
+For this reason this project database will expire on January 16, 2024. The site should continue to be up but all DB dependant content will be lost. A PostgreSQL database was provisioned for this project.
+
+# CAN I REPLACE THE PostgreSQL DATABASE WITH OTHER TYPE OF DATABASE LIKE MySQL or SQLite?
+
+Render (afaik) does not support MySQL on its managed services and due to ephimeral storage it is not possible to replace the database with a SQLite db like the one used during development, as SQLite databases are file dependant.
+
+# CAN I CONNECT AN EXTERNAL DATABASE TO MY APP?
+
+Maybe... must investigate.
+
+# HOW WAS THE DEPLOYMENT PROCESS IN RENDER?
+
+After the account creation on Render a Web Service project was created and my GitHub account was kooked up with Render. The app repo (https://github.com/felipemunozri/blog-with-users-for-deploy) was associated with this projec. The starting command was changed from gunicorn app:app to gunicorn main:app. After that the deployment process is supposed to be automatic after every commit to the repo.
+
+During this process serveral problems raised due to the app requirements and library version available on Render, as Render uses a lot of old library versions. For this reason the following list of requirements and versions was set for this project.
+
+Bootstrap_Flask==2.3.1
+Flask==2.2.5
+Flask_CKEditor==0.4.6
+Flask_Login==0.6.2
+Flask-Gravatar==0.5.0
+Flask_SQLAlchemy==3.0.5
+Flask_WTF==1.1.1
+Werkzeug==2.2.3
+WTForms==3.0.1
+SQLAlchemy==2.0.19
+bleach==6.0.0
+itsdangerous==2.1.2
+python-dotenv==0.21.1
+gunicorn==21.2.0
+Flask-Mail==0.9.1
+Flask-DebugToolbar==0.13.1
+psycopg2-binary==2.9.6
+email-validator==2.0.0.post2
+
+By default Render uses Python version 3.7 but it's possible to set a specific Python version by creating an environment variable with the name PYTHON_VERSION and passing 3.11.6 as the value.
+
+Other environment variable were set up as part of the app configurations, like for example the smtp related configurations.
+
+It is also possible to pass a .env file directly as a secret file for Render to store and use it on the app. This Secret files are available to read at the root of the repo (or Docker context) and are also available to load by an absolute path at /etc/secrets/<filename>.
+
+After the app the deployment a new PostgreSQL database instance was created and the Internal Database URL was copied and set as an enviroment variable with the name DB_URI. At this point it was necessary to modify this Internal Database URL as per SQLAlchemy requirements, the start of the database URI must begin with postgresql instead of juts postgres, as was the default value given by the Render PostgreSQL instance.
+
+The reason we can seamlessly switch from SQLite to Postgres is because we are using the psycopg package in combination with SQLAlchemy. The psycopg module is a PostgreSQL database adapter for Python (see https://pypi.org/project/psycopg2-binary/)
+
+# HOSTING ALTERNATIVES
+
+Provider                   ~Cost / Month                Name of Plan
+
+Heroku				$5			Eco & Basic
+Render                          $0                      Individual
+Cyclic                          $0                      Free Forever
+Glitch                       	$0                      Starter
+Vercel                       	$0                      Hobby
+PythonAnywhere               	$0                      Beginner 
+
+

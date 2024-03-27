@@ -1,0 +1,6 @@
+1. Simplicity
+2. Consistency
+3. Reading patterns
+4. Layouts
+5. All Platform Design
+6. Don't Design for an Evil UX

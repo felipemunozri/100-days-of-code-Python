@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- Here we create an empty block which can be customized when a template inherits from this template  -->
+    <title>{% block title %} {% endblock %}</title>
+
+    <!-- Here we create a block that contains some code. If the template which inherits uses the super() expression
+    inside this block styling, the portion of the code will be applied to it as well -->
+    <style>
+        {% block styling %}
+        body{
+            background: purple;
+        }
+        {% endblock %}
+    </style>
+
+</head>
+<body>
+
+{% block content %} {% endblock %}
+
+</body>
+</html>

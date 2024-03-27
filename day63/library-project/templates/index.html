@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Library</title>
+</head>
+<body>
+<h1>My Library</h1>
+<ul>
+    <!-- In Jinja2 we cannot apply functions like len() directly, so we must use the '|' operator and then one of the
+    builtin filters, in this case we use 'length' -->
+    {% if books_list | length == 0 %}
+        <p>Library is empty.</p>
+    {% else: %}
+        {% for book in books_list: %}
+            <li>
+                <a href="{{ url_for('delete', id=book.id) }}">Delete</a>
+                {{ book.title }} - {{ book.author }} - {{ book.rating }}/10
+                <a href="{{ url_for('edit', id=book.id) }}">Edit Rating</a>
+            </li>
+        {% endfor %}
+    {% endif %}
+</ul>
+
+<a href="{{ url_for('add') }}">Add New Book</a>
+</body>
+</html>

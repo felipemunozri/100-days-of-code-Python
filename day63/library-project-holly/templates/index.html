@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{#
+{% from 'bootstrap5/form.html' import render_form %}
+#}
+{% block title %}My Library - Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-8">
+            <h1>My Library</h1>
+            {% if books | length == 0  %}
+                <p>There aren't any books in the library yet -- let's add one!</p>
+            {% else: %}
+                <table class="table .w-auto">
+                    <thead>
+                        <tr>
+                            <th scope="col">Book</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Rating</th>
+                            <th scope="col">Notes</th>
+                            <th scope="col">Edit Rating</th>
+                            <th scope="col">Delete Record</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in books: %}
+                            <tr>
+                                <td scope="row"> {{book["title"]}}</td>
+                                <td>{{ book["author"] }}</td>
+                                <td>{{ book["rating"] }}</td>
+                                <td>{{ book["notes"] }}</td>
+                                <td><a href="{{url_for('edit', book_id=book['id'])}}">✏️</a></td>
+                                <td><a href="{{url_for('delete', book_id=book['id'])}}">🗑️</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+            <a class="btn btn-warning btn-lg" href="{{url_for('add')}}" role="button">Add a Book!</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

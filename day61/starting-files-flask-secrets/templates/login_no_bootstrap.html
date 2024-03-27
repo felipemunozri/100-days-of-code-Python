@@ -1,0 +1,29 @@
+{% extends "base_no_bootstrap.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Login</h1>
+    <!-- To see our validations instead of the browser validations we must turn them off using the novalidate attribute -->
+    <form method="POST" , action="{{ url_for('login') }}" novalidate>
+        <!-- form.csrf_token is a hidden field which adds csrf protection to the form. Requires an app.secret_key in main.py -->
+        {{ form.csrf_token }}
+        <p>
+            <!-- this is the label for our input -->
+            {{ form.email.label }} <br>
+            <!-- the input field. This size argument is the width of the field -->
+            {{ form.email(size=30) }}
+            <!-- we create a span element to show the user the errors raised after validation -->
+            {% for err in form.email.errors: %}
+            <span style="color: red">{{ err }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password.label }} <br> {{ form.password }}
+            {% for err in form.password.errors: %}
+            <span style="color: red">{{ err }}</span>
+            {% endfor %}
+        </p>
+        <!-- this is the submit input -->
+        {{ form.submit }}
+    </form>
+{% endblock %}

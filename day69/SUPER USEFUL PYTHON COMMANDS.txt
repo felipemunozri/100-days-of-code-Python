@@ -1,0 +1,8 @@
+# this command starts a web server in the desired -p port and displays what # attributes are available inside both the built-ins and any package in a project
+python -m pydoc -p 5000
+
+# to generate the file requirements.txt
+pip freeze > requirements.txt
+
+# to install packages from the requirements.txt file
+pip install -r requirements.txt 

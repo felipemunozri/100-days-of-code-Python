@@ -1,0 +1,3 @@
+PUT replaces the WHOLE object we pass in the request
+
+PATCH replaces only the part of the object that needs to be replaced, and that's what we pass in the request

@@ -1,0 +1,119 @@
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+IMPORTANT:
+
+ - HEAD always points to a named branch, except when we do a git checkout to a specific commit. When we do that we enter in a special state called DETACHED HEAD.
+ - Each branch refers to a specific commit. When we create a new commit the branch is updated to refer to the new commit.
+ - A commit is a snapshot of a repository at a given point in time.
+
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+
+git config --global user.name "<name>"  ## Allows to specify the name that will be associated with our git operations.
+
+git config --global user.email "<email>"## Allows to specify the email that will be associated with our git operations.
+
+git config --global color.ui auto	## Enables the colorization of the commmand line.
+
+git init				## Creates an empty repository or reinitializes an existing one. Creates an empty .git dir and its subdirs. By default creates 						## a new branch with the name currently set at the init.defaultBranch property in the git configurations.
+
+git init -b <branchname>		## Allows to specify the name of the initial branch.
+
+git branch -M main			## Forcefully renames the current branch to main. Useful when we forget to name our initial branch as main instead of master.
+
+git status				## Shows the working tree status.
+
+git add . 				## Adds all the files in the working directory to the staging area.
+
+git commit -m "Comment in present tense"## Allows to pass a commit message. Commit messages should begin with uppercase, be descriptive, brief, and be writen in 						## present tense.
+
+git commit -v				## Opens a text editor to add a commit message but also shows a more detailed view of the content that is about to be commited.
+
+git status				## Shows status of working directory.
+
+git log	-<num>				## Show logs in current branch. Optionally we can limit number of result by using -<num>.
+
+git reflog				## Shows log for all operations.
+
+git diff <filename>			## Compares difference between current state of filename and filename state in the las commit.
+
+git checkout <filename>  		## Restores filename to previous status.
+
+git remote add origin <repo_url>	## Adds a remote repo to our local git project.
+
+git remote -v				## Shows the current remote repositories linked with our local repo.
+
+git remote set-url --add origin <repo_url>  ## To change remote repo.
+
+git push -u origin main			## Pushes local changes to remote repo. The -u flag links local repo with remote.
+
+git rm --cached -r filename.txt 	## To remove files from staging area, optional use -r flag for recursive.
+
+git clone <repo_url>			## Creates a copy of a remote repo in our machine.		
+
+git branch -a				## Lists all branches.
+
+git branch <branchname>			## Creates branchname.
+
+git branch -d <branchname>		## -d deletes branchname.
+
+git checkout -b <branchname>		## Creates and changes to branchname.
+
+git commit -m "some change"		## We make a commit in some branchname.
+git checkout main			## Normally we checkout to main before doing a merge.
+git merge <branchname>			## Then we merge with the changes in branchname.
+git log 				## After a merge, in git log we should see a new merge commit.
+
+git checkout <branchname>		## Optionally we can checkout to branchname and merge with main.
+git merge main				## this will make branchname to be up to date with main.
+
+git checkout main			## We checkout to main.
+git commit -m "some change"		## We make some changes in main.
+git checkout <branchname>		## We checkout again to branchname.
+git rebase main				## We can "rebase" our branchname to bring the changes from main.
+
+git rebase -i main			## Rebase with interactive mode -i, which opens a text editor to show details on what is about to be "rebased". Here we can 
+					## switch the order of the commits, edit, or select which commits we want to import and which ones we don't. To mark a commit  						## as wanted we add the word "pick". We could also squash commits, meaining combine various commits into a single one.
+
+git checkout <commitnumber>		## We checkout to a commit number to change the state of our project, like "traveling in time". Files are changed to the state 	git status				## they were in that commit and the current branch is changed to the one of that commit. Local modifications in the working 	git commit -m "something"		## tree are kept though. HEAD enters in the DETACHED HEAD state. If we checkout again to where we were previously all the git branch -b <newbranchname>		## changes made will in detached mode are lost. To preserve those changes we can make a commit or create a new branch.
+
+git checkout <branchname>^		## Relative reference.
+
+git checkout <branchname>~<num>		## Numerric relative reference.
+
+git branch -f <branchname> HEAD~3	## Force branchname to a certain commit.
+
+git reset --soft <commitnumber>		## Moves the branch pointer to the desired commitnumber but doesn't affect currently staged files or mofified files in the 						## working directory.
+
+git reset --mixed <commitnumber>	## Moves the branch pointer to the desired commitnumber and will affect currently staged files but not mofified files in the 						## working directory.
+
+git reset --hard <commitnumber>		## Moves the branch pointer to the desired commitnumber in a destructive way. Files and changes in files are lost and log  						## history will not reflect the commit after the one we are going back. We can think of it use case as an "uncommit" situation.
+
+git reset HEAD~1			## Moves the reference of HEAD to one commit before. It's equivalent to the syntax git reset HEAD^. It's important to mention						## that reset changes work locally and are not propagated to the remote repo.
+
+git revert HEAD				## Git revert creates a new commit with the changes necessary to reset files to the state they were on a certain commit. Since 						## we are creating a new commit with the necessary changes, we can propagate this change to the remote repo.
+
+git cherry-pick <commitnumber1> <commitnumber2>  ## Allows to bring the specified commits to the branch where we are currently situtated.
+
+git clone				## Creates a copy of a remote repo in our local machine. In our machine now we'll have our local branches and new branches 						## identified by the prefix origin/branchname, which represent copies of the branches in the remote repo.
+
+git fetch				## fetch downloads the changes on the remote repo that are not present in our local copy of the remote repo but it doesn't 						## automatically changes our working directory with with those changes.
+
+git pull				## It's a combination of git fetch and git merge into a single command. It fetches the changes from the remote repo and then 						## makes a merge to combine our local work with those changes by creating a new merge commit in our local repo.
+
+git push				## Upload changes from local repo to remote repo and forwards both the remote repo and our local copy of the remote repo to the 					## last changes so everything is in sync.
+
+git stash				## Moves all the files currently in the staging area to the stashing area. Useful when we are working on something not ready to 					## be commited yet, but we need to work on something else, so we must clear our working and staging area.
+
+git stash pop				## Retrieves the most recent stashed files to the working area.
+
+git stash list				## List all the set of changes stashed in the stash area.
+
+git stash drop				## Deletes the most recent set of changes in the stashed area.
+
+git rm --cached <file>			## When a file is mistakenly tracked (i.e. a .gitignore rule was implemented after the file was first tracked so it keeps 						## getting tracked) we can remove it from the tracking and our working area by using git rm <file>. If we want to untrack it   						## but keep it in our working directory we use the --cached flag.
+
+git mv <file-original> <file-renamed>   ## Allows to rename a file and automatically adds it to the staging area so the name change can be commited.
+
+git commit --amend			## Allows to amend the last commit. By default it opens a text editor to modify the message of the last commit. If we want to 						## also change the actual content of the last commit, first we change the required files, we add them to the staging area, and 						## then we use the git commit --amend command.
+
+git show				## 
+

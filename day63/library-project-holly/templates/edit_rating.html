@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{#
+{% import 'bootstrap5/wtf.html' as wtf %}
+#}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block title %}My Library - Edit Rating{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-sm-12 col-md-8">
+            <h1>Edit Book Rating</h1>
+            <p>Book Name: {{ book.title }}</p>
+            <p>Current Rating {{ book.rating }}</p>
+            {{ render_form(form) }}
+        </div>
+    </div>
+{% endblock %}

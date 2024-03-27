@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+
+{% block title %}My Library - Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="text-secondary px-4 text-center">
+        <div class="py-5">
+            <h1 class="display-5 fw-bold"><span class="text-dark">Welcome to</span> My Library</h1>
+            <div class="col-lg-12 mx-auto">
+                <p class="fs-5 mb-4 py-4">It's simple, add your books 📖 and rate them!</p>
+                {% if books_list == []: %}
+                <p class="pb-3">Your library is empty 🔍. Let's add some books.</p>
+                {% else %}
+                <table class="table mb-5">
+                    <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Rating</th>
+                        <th scope="col">Edit Rating</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for book in books_list[:]: %}
+                    <tr>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.author }}</td>
+                        <td>{{ book.rating }}</td>
+                        <td><a href="{{ url_for('edit', id=book.id) }}">📝</a></td>
+                        <td><a href="{{ url_for('delete', id=book.id) }}">🗑</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <a href="{{ url_for('add') }}" class="btn btn-info btn-lg px-4 me-sm-3 fw-bold">Add Book</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
