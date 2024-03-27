@@ -1,0 +1,29 @@
+body {
+  /* background-color: #F8F7F5; */
+  background-color: #222;
+  font-family: 'Montserrat';
+  /* color: black; */
+  color: #F8F7F5;
+}
+
+hr {
+  border-style: none;
+  border-top-style: dotted;
+  border-color: #83BEC5;
+  border-width: 5px;
+  width: 5%;
+}
+
+h1, h2, h3 {
+  color: #83BEC5;
+}
+
+/* unvisited link */
+a:link {
+  color: #83BEC5;
+}
+
+/* visited link */
+a:visited {
+  color: gold;
+}

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    {#
+        To implement redirections from one webpage to another in Jinja we use the url_for() method, which resides inside
+        the href of an a element. The url_for() method receives the name (as a string) of one of the functions that we
+        use to render and return a webpage. In this example we are passing the get_blog() function to redirect to the
+        blog webpage.
+    #}
+    <a href="{{ url_for('get_blog') }}">Go to blog</a><br>
+    <br>
+    {#
+        Apart from redirecting to another webpage we can also pass one or more keyword parameters inside the same
+        url_for() method. This is also known as url building. In this example we are passing the parameter 'num' with its
+        value 3. In the server.py file we use the passed value in the get_test() function.
+    #}
+    <a href="{{ url_for('get_test', num=3) }}">Go to test</a>
+</body>
+</html>

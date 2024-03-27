@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blog</title>
+</head>
+<body>
+{#
+   With Jinja we can write multiline fragments of Python code inside a html file, but for that we must use some
+   special markup syntax known as Jinja delimiters:
+
+    - We must enclose every statement (if, for, while, etc.) in the code fragment between a pair of these {% ... %}
+    - Expressions (like variables or function calls) must be enclosed between a pair of these {{ ... }}
+    - Comments must be enclosed in a pair of angled brackets and the # character (see, this whole section is a comment xD)
+    - To escape blocks of code we can enclose them in between these {% raw %} ... {% endraw %}
+
+    Also, in case of using a for loop we must use the special word endfor at the end of its implementation. Same for if
+    statements, we use endif.
+#}
+
+<!-- example block -->
+    {% for blog_post in posts: %}
+        {% if blog_post["id"] == 2: %}
+            <h1>{{ blog_post["title"] }}</h1>
+            <h2>{{ blog_post["subtitle"] }}</h2>
+        {% endif %}
+    {% endfor %}
+
+    <a href="{{ url_for('home') }}">Back to home</a>
+</body>
+</html>
